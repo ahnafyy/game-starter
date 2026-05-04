@@ -1,0 +1,3 @@
+[submodule "Game/Plugins/UnrealMCP"]
+	path = Game/Plugins/UnrealMCP
+	url = https://github.com/chongdashu/unreal-mcp.git
