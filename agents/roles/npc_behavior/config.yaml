@@ -1,0 +1,11 @@
+role: npc-behavior
+model: claude-opus-4-5
+allowed_tools:
+  - execute_python
+description: >
+  Designs StateTree and Behavior Tree logic for NPC archetypes.
+  Produces state definitions, task node specs, and blackboard variable schemas.
+  Uses execute_python to scaffold BT/StateTree assets via Unreal Python.
+escalation:
+  on_missing_perception_config: flag to human
+  on_animation_state_conflict: flag to human

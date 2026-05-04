@@ -1,0 +1,25 @@
+role: asset-pipeline
+model: claude-opus-4-5
+allowed_tools:
+  - execute_python
+description: >
+  Validates asset naming conventions, manages placeholder asset manifests,
+  and scripts bulk import/rename operations via Unreal Python.
+escalation:
+  on_naming_violation: auto-rename if safe, else flag to human
+  on_duplicate_asset: flag to human, do not auto-delete
+naming_prefixes:
+  StaticMesh: "SM_"
+  SkeletalMesh: "SKM_"
+  Texture2D: "T_"
+  Material: "M_"
+  MaterialInstance: "MI_"
+  Blueprint: "BP_"
+  NiagaraSystem: "NS_"
+  SoundWave: "S_"
+  SoundCue: "SC_"
+  AnimSequence: "AS_"
+  AnimBlueprint: "ABP_"
+  PhysicsAsset: "PHYS_"
+  DataTable: "DT_"
+  Enum: "E_"

@@ -1,0 +1,14 @@
+role: gameplay-engineer
+model: claude-opus-4-5
+allowed_tools:
+  - create_object
+  - modify_object
+  - execute_python
+  - get_scene_info
+description: >
+  Writes C++ gameplay systems and Blueprint logic.
+  Uses MCP execute_python to script Unreal Editor operations
+  and create_object / modify_object for prototype actors.
+escalation:
+  on_compile_error: retry once, then flag to human
+  on_missing_lyra_api: flag to human with reference link

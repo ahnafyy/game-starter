@@ -1,0 +1,57 @@
+name: UE Automation Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Game/Source/**"
+      - "Game/Config/**"
+      - "Game/GameStarter.uproject"
+  pull_request:
+    branches: [main]
+    paths:
+      - "Game/Source/**"
+      - "Game/Config/**"
+      - "Game/GameStarter.uproject"
+
+# Requires a self-hosted macOS runner with:
+#   - Unreal Engine 5.7 installed at /Users/Shared/Epic Games/UE_5.7
+#   - Runner label: self-hosted, macos, unreal
+#   - Lyra Content/ already present at $RUNNER_WORKSPACE/Game/Content
+#
+# To register a runner:
+#   GitHub repo → Settings → Actions → Runners → New self-hosted runner
+
+jobs:
+  ue-automation:
+    name: Build + Automation Tests (macOS self-hosted)
+    runs-on: [self-hosted, macos, unreal]
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Verify UE 5.5 install
+        run: |
+          UE_EDITOR="/Users/Shared/Epic Games/UE_5.7/Engine/Binaries/Mac/UnrealEditor"
+          if [ ! -f "$UE_EDITOR" ]; then
+            echo "::error::UnrealEditor not found at $UE_EDITOR"
+            exit 1
+          fi
+          echo "UE_ROOT=/Users/Shared/Epic Games/UE_5.7" >> "$GITHUB_ENV"
+
+      - name: Build project (Development Editor)
+        run: bash tools/ue-command-scripts/build.sh
+
+      - name: Run automation tests
+        run: bash tools/ue-command-scripts/run-automation-tests.sh "GameStarter."
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ue-automation-results
+          path: Saved/AutomationResults/
+          retention-days: 14

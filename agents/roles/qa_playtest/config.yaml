@@ -1,0 +1,15 @@
+role: qa-playtest
+model: claude-opus-4-5
+allowed_tools:
+  - get_scene_info
+  - execute_python
+description: >
+  Runs repeatable automated gameplay checks via Unreal Automation Testing
+  and scripted MCP sequences. Produces structured bug reports with repro steps.
+escalation:
+  on_crash: immediate human escalation, do not retry
+  on_flaky_test: flag after 2 consecutive failures
+test_scenarios:
+  - spawn_player_verify_start
+  - interact_with_object
+  - objective_trigger_fires
