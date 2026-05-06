@@ -6,7 +6,7 @@ Two paths depending on your machine. **Shadow PC is recommended** — Unreal Eng
 
 ### 1. Get a Shadow PC
 
-1. Sign up at **shadowpc.com** → choose the **Shadow** plan (~$29.99/mo)
+1. Sign up at **[eu.shadow.tech](https://eu.shadow.tech/)** → choose the **Shadow** plan (~$29.99/mo)
 2. Download the Shadow app on your Mac
 3. Download and install **[Parsec](https://parsec.app)** on your Mac AND on the Shadow PC — use Parsec instead of the Shadow client for better latency when working in the UE viewport
 
