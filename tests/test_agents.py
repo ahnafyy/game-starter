@@ -12,6 +12,14 @@ ALL_AGENT_CLASSES = [
     agents.AssetPipelineAgent,
 ]
 
+STUB_AGENT_CLASSES = [
+    agents.GameDirectorAgent,
+    agents.GameplayEngineerAgent,
+    agents.LevelDesignerAgent,
+    agents.NpcBehaviorAgent,
+    agents.QaPlaytestAgent,
+]
+
 
 @pytest.mark.parametrize("agent_class", ALL_AGENT_CLASSES)
 def test_agent_instantiates(agent_class):
@@ -34,7 +42,7 @@ def test_agent_config_has_required_keys(agent_class):
     assert "allowed_tools" in instance._config
 
 
-@pytest.mark.parametrize("agent_class", ALL_AGENT_CLASSES)
+@pytest.mark.parametrize("agent_class", STUB_AGENT_CLASSES)
 async def test_agent_run_raises_not_implemented(agent_class):
     from agents.shared.contracts import AgentTask
 
