@@ -1,5 +1,5 @@
 role: asset-pipeline
-model: claude-opus-4-5
+model: gpt-4o-mini
 allowed_tools:
   - execute_python
 description: >

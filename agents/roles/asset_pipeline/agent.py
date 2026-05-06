@@ -3,11 +3,26 @@ from __future__ import annotations
 import json
 import os
 
-import anthropic
+from openai import OpenAI
 
 from agents.shared.base_agent import BaseAgent
 from agents.shared.contracts import AgentResult, AgentTask, MCPCommand
 from agents.shared.mcp_client import MCPClient
+
+# Provider configuration via environment variables.
+# Defaults target GitHub Models — swap base_url + key for OpenAI, Groq, or Ollama.
+#
+# GitHub Models (free, needs GITHUB_TOKEN):
+#   LLM_BASE_URL=https://models.inference.ai.azure.com
+#   LLM_API_KEY=<your GitHub PAT>
+#   LLM_MODEL=gpt-4o-mini  (or openai/gpt-4.1, meta/llama-4-scout, etc.)
+#
+# OpenAI:  LLM_BASE_URL=https://api.openai.com/v1  LLM_API_KEY=sk-...
+# Groq:    LLM_BASE_URL=https://api.groq.com/openai/v1  LLM_API_KEY=gsk_...
+# Ollama:  LLM_BASE_URL=http://localhost:11434/v1  LLM_API_KEY=ollama
+
+_DEFAULT_BASE_URL = "https://models.inference.ai.azure.com"
+_DEFAULT_MODEL = "gpt-4o-mini"
 
 
 class AssetPipelineAgent(BaseAgent):
@@ -16,15 +31,19 @@ class AssetPipelineAgent(BaseAgent):
     role = "asset_pipeline"
 
     async def run(self, task: AgentTask) -> AgentResult:
-        client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        client = OpenAI(
+            api_key=os.environ.get("LLM_API_KEY") or os.environ["GITHUB_TOKEN"],
+            base_url=os.environ.get("LLM_BASE_URL", _DEFAULT_BASE_URL),
+        )
+        model = os.environ.get("LLM_MODEL", self.model)
         issued_commands: list[MCPCommand] = []
 
         # Ask the LLM which Python snippet to run against the Unreal asset library
-        response = client.messages.create(
-            model=self.model,
+        response = client.chat.completions.create(
+            model=model,
             max_tokens=1024,
-            system=self._system_prompt,
             messages=[
+                {"role": "system", "content": self._system_prompt},
                 {
                     "role": "user",
                     "content": (
@@ -33,11 +52,11 @@ class AssetPipelineAgent(BaseAgent):
                         "Reply with a JSON object: "
                         '{"python_snippet": "<unreal python code>", "reasoning": "<brief>"}'
                     ),
-                }
+                },
             ],
         )
 
-        raw = response.content[0].text.strip()
+        raw = response.choices[0].message.content.strip()
         # Strip markdown code fences if present
         if raw.startswith("```"):
             raw = raw.split("```")[1]
