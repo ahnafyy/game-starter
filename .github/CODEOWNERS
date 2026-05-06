@@ -1,0 +1,13 @@
+# Global owner — catches anything not matched below
+* @ahnafyy
+
+# Agent layer
+/agents/ @ahnafyy
+
+# CI / tooling
+/.github/ @ahnafyy
+/tools/ @ahnafyy
+/scripts/ @ahnafyy
+
+# UE project
+/Game/ @ahnafyy

@@ -33,7 +33,7 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Verify UE 5.5 install
+      - name: Verify UE 5.7 install
         run: |
           UE_EDITOR="/Users/Shared/Epic Games/UE_5.7/Engine/Binaries/Mac/UnrealEditor"
           if [ ! -f "$UE_EDITOR" ]; then
