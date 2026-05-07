@@ -8,8 +8,6 @@ from pathlib import Path
 import click
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
-
 from agents.shared.contracts import AgentTask
 
 AGENT_REGISTRY: dict[str, str] = {
@@ -49,6 +47,7 @@ def _load_agent(name: str):
 )
 def main(agent: str, task: str, context: str) -> None:
     """Run a dev-workflow agent against the GameStarter Unreal project."""
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
     try:
         ctx = json.loads(context)
     except json.JSONDecodeError as exc:
