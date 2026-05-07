@@ -105,6 +105,25 @@ After the UE project builds, enable the **UnrealMCP** plugin:
 
 ## 🎮 Running an agent
 
+### Option A — VS Code Copilot (recommended)
+
+Open Copilot Chat, click the agent picker, and choose one of the six built-in agents:
+
+| Agent | What it does |
+|---|---|
+| **Game Director** | GDD, feature backlog, scope decisions |
+| **Gameplay Engineer** | C++ / Blueprint coding via MCP tools |
+| **Level Designer** | Actor placement, lighting, navmesh via MCP tools |
+| **NPC Behavior** | StateTree / AI scaffolding via MCP tools |
+| **QA Playtest** | Automated tests and bug reports via MCP tools |
+| **Asset Pipeline** | Naming audits and bulk renames via MCP tools |
+
+VS Code auto-starts the MCP server — no terminal needed. Unreal Editor must be open with the UnrealMCP plugin enabled for the engineering agents to issue editor commands.
+
+### Option B — Python CLI
+
+Requires a `.env` file with `GITHUB_TOKEN` or `LLM_API_KEY` (see [docs/setup.md](docs/setup.md)).
+
 ```bash
 # Start the MCP server (Unreal Editor must be open and MCP plugin running)
 uv run tools/mcp-server/server.py
