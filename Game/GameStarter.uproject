@@ -3,6 +3,7 @@
     "EngineAssociation": "5.7",
     "Category": "",
     "Description": "Lyra-based game starter with agentic dev workflow",
+    "AdditionalPluginDirectories": ["Plugins/UnrealMCP/MCPGameProject/Plugins"],
     "Modules": [
         {
             "Name": "GameStarter",
@@ -29,6 +30,10 @@
         },
         {
             "Name": "CommonGame",
+            "Enabled": true
+        },
+        {
+            "Name": "CommonUser",
             "Enabled": true
         },
         {

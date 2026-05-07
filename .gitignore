@@ -24,6 +24,7 @@ FileOpenOrder/
 #   xcopy "<LyraPath>\Plugins\GameplayMessageRouter" "Game\Plugins\GameplayMessageRouter" /E /I /Y
 Game/Content/
 Game/Plugins/CommonGame/
+Game/Plugins/CommonUser/
 Game/Plugins/GameplayMessageRouter/
 Game/Plugins/UnrealMCP/MCPGameProject/Content/
 
