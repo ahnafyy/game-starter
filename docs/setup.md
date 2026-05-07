@@ -48,14 +48,24 @@ This will:
 - Create a Python virtual environment and install dependencies
 - Generate `mcp.json` with the correct absolute paths
 
-### 6. Copy Lyra content into the repo
+### 6. Copy Lyra content and plugins into the repo
 
-```bash
-# From the Lyra project you created in step 2
-xcopy "C:\UnrealProjects\LyraStarterGame\Content" "C:\path\to\game-starter\Game\Content" /E /I
+These files are gitignored (Epic EULA prohibits redistribution) so they must be copied locally on every machine.
+
+```powershell
+# Replace <LyraPath> with where you installed Lyra in step 2 (e.g. C:\UnrealProjects\LyraStarterGame)
+$lyra = "C:\UnrealProjects\LyraStarterGame"
+$repo = "C:\Users\Shadow\appdev\repos\game-starter\Game"
+
+# Game content (maps, assets, blueprints)
+xcopy "$lyra\Content" "$repo\Content" /E /I /Y
+
+# Lyra plugins required by GameStarter.uproject
+xcopy "$lyra\Plugins\CommonGame" "$repo\Plugins\CommonGame" /E /I /Y
+xcopy "$lyra\Plugins\GameplayMessageRouter" "$repo\Plugins\GameplayMessageRouter" /E /I /Y
 ```
 
-The `Game/Content/` folder is gitignored — it stays local on the Shadow PC.
+`Game/Content/`, `Game/Plugins/CommonGame/`, and `Game/Plugins/GameplayMessageRouter/` are all gitignored — they stay local only.
 
 ### 7. Open the UE project
 
@@ -145,6 +155,9 @@ Right-click `Game/GameStarter.uproject` → **Switch Unreal Engine version** →
 
 **UnrealMCP plugin fails to compile**
 The submodule targets UE 5.5. On UE 5.7 you may need to update `Game/Plugins/UnrealMCP/MCPGameProject/Plugins/UnrealMCP/UnrealMCP.uplugin` — change `"EngineVersion"` to `"5.7.0"` and rebuild.
+
+**UE project says "plugin could not be found" for CommonGame or GameplayMessageRouter**
+These are Lyra plugins — not part of the base engine install. Copy them from your Lyra Starter Game project (see step 6 above). If you haven't installed Lyra yet: Epic Games Launcher → Unreal Engine → Samples → Lyra Starter Game → Create Project.
 
 **`mcp.json` has wrong path**
 Delete it and re-run `bash scripts/setup.sh` — it regenerates with the correct absolute path.
