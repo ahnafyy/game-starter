@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "unrealMCP": {
+      "type": "stdio",
+      "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+      "args": [
+        "run",
+        "tools/mcp-server/server.py"
+      ],
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}

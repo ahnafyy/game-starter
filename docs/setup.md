@@ -96,7 +96,26 @@ Follow the same steps as Path A but:
 
 ## MCP client configuration
 
-`setup.sh` generates `mcp.json` in the repo root with correct absolute paths. Copy the contents into your AI client's config file:
+### VS Code (recommended)
+
+The repo ships a `.vscode/mcp.json` that wires the MCP server directly into VS Code Copilot — no manual config needed. Open the project in VS Code and the server starts automatically when you use an agent.
+
+Six custom agents are available in `.github/agents/` and appear in the Copilot agent picker:
+
+| Agent | Role |
+|---|---|
+| **Game Director** | GDD, feature backlog, scope decisions |
+| **Gameplay Engineer** | C++ / Blueprint implementation via MCP |
+| **Level Designer** | Actor placement, lighting, navmesh via MCP |
+| **NPC Behavior** | StateTree / AI scaffolding via MCP |
+| **QA Playtest** | Automated tests and bug reports via MCP |
+| **Asset Pipeline** | Naming audits and bulk renames via MCP |
+
+> **Note:** When using VS Code Copilot as your AI client, `GITHUB_TOKEN` / `LLM_API_KEY` in `.env` are **not required** — those are only used by the Python CLI (`agents/run.py`). The VS Code agents call MCP tools directly through Copilot.
+
+### Other AI clients
+
+`setup.sh` generates `mcp.json` in the repo root with correct absolute paths. Copy the contents into your client's config:
 
 | Client | Config file location |
 |---|---|

@@ -3,8 +3,12 @@ from __future__ import annotations
 import asyncio
 import importlib
 import json
+from pathlib import Path
 
 import click
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 from agents.shared.contracts import AgentTask
 
