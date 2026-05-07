@@ -80,14 +80,15 @@ flowchart LR
 | | Requirement | Version | Notes |
 |---|---|---|---|
 | 🎮 | Unreal Engine | 5.7 | Via Epic Games Launcher — [docs/setup.md](docs/setup.md) |
-| 🐍 | Python | 3.12+ | |
+| �️ | Visual Studio | 2022 | "Game development with C++" workload required to compile C++ modules |
+| �🐍 | Python | 3.12+ | |
 | 📦 | uv | latest | `pip install uv` |
 | 🔀 | Git | 2.x | With submodule support |
 | 🖥️ | Shadow PC or capable machine | — | UE 5.7 is too heavy for MacBook Air |
 
 ## 🚀 Quick start
 
-```bash
+```powershell
 # 1. Clone
 git clone git@github.com:ahnafyy/game-starter.git
 cd game-starter
@@ -99,11 +100,15 @@ bash scripts/setup.sh
 $lyra = "C:\UnrealProjects\LyraStarterGame"
 xcopy "$lyra\Content"                       "Game\Content"                       /E /I /Y
 xcopy "$lyra\Plugins\CommonGame"            "Game\Plugins\CommonGame"            /E /I /Y
+xcopy "$lyra\Plugins\CommonUser"            "Game\Plugins\CommonUser"            /E /I /Y
 xcopy "$lyra\Plugins\GameplayMessageRouter" "Game\Plugins\GameplayMessageRouter" /E /I /Y
+xcopy "$lyra\Plugins\ModularGameplayActors" "Game\Plugins\ModularGameplayActors" /E /I /Y
 
-# 4. Open the UE project (requires UE 5.7 installed)
-#    Right-click Game/GameStarter.uproject → Generate Xcode/VS project files
-#    Then build with Development Editor target
+# 4. Build (requires Visual Studio 2022 with "Game development with C++" workload)
+& "C:\Program Files\Epic Games\UE_5.7\Engine\Build\BatchFiles\Build.bat" GameStarterEditor Win64 Development "$PWD\Game\GameStarter.uproject" -waitmutex
+
+# 5. Open the UE project
+#    Double-click Game/GameStarter.uproject
 ```
 
 After the UE project builds, enable the **UnrealMCP** plugin:
