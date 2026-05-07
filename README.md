@@ -25,7 +25,7 @@ Lyra provides the gameplay framework — abilities, input, UI, multiplayer patte
 | 🛠️ Dev tools | Build, test, package scripts | `tools/` |
 | ⚙️ CI | GitHub Actions (Python lint/test + UE automation) | `.github/workflows/` |
 
-> **⚠️ Lyra content is NOT in this repo.** The `Game/Content/` folder is gitignored. You download Lyra separately via the Epic Games Launcher and copy it in locally. See [docs/setup.md](docs/setup.md).
+> **⚠️ Lyra content and plugins are NOT in this repo** (Epic EULA prohibits redistribution). `Game/Content/`, `Game/Plugins/CommonGame/`, and `Game/Plugins/GameplayMessageRouter/` are gitignored. You install Lyra Starter Game via the Epic Games Launcher and copy them in locally. See [docs/setup.md](docs/setup.md) step 6 for the exact commands.
 
 ## 🤖 Six-agent dev workflow
 
@@ -95,7 +95,13 @@ cd game-starter
 # 2. Bootstrap (submodules + Python venv + mcp.json)
 bash scripts/setup.sh
 
-# 3. Open the UE project (requires UE 5.7 installed)
+# 3. Copy Lyra content + plugins (requires Lyra Starter Game installed via Epic Games Launcher)
+$lyra = "C:\UnrealProjects\LyraStarterGame"
+xcopy "$lyra\Content"                       "Game\Content"                       /E /I /Y
+xcopy "$lyra\Plugins\CommonGame"            "Game\Plugins\CommonGame"            /E /I /Y
+xcopy "$lyra\Plugins\GameplayMessageRouter" "Game\Plugins\GameplayMessageRouter" /E /I /Y
+
+# 4. Open the UE project (requires UE 5.7 installed)
 #    Right-click Game/GameStarter.uproject → Generate Xcode/VS project files
 #    Then build with Development Editor target
 ```
