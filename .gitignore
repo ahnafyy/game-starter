@@ -26,6 +26,7 @@ Game/Content/
 Game/Plugins/CommonGame/
 Game/Plugins/CommonUser/
 Game/Plugins/GameplayMessageRouter/
+Game/Plugins/ModularGameplayActors/
 Game/Plugins/UnrealMCP/MCPGameProject/Content/
 
 # UE generated headers

@@ -61,11 +61,13 @@ $repo = "C:\Users\Shadow\appdev\repos\game-starter\Game"
 xcopy "$lyra\Content" "$repo\Content" /E /I /Y
 
 # Lyra plugins required by GameStarter.uproject
-xcopy "$lyra\Plugins\CommonGame" "$repo\Plugins\CommonGame" /E /I /Y
+xcopy "$lyra\Plugins\CommonGame"            "$repo\Plugins\CommonGame"            /E /I /Y
+xcopy "$lyra\Plugins\CommonUser"            "$repo\Plugins\CommonUser"            /E /I /Y
 xcopy "$lyra\Plugins\GameplayMessageRouter" "$repo\Plugins\GameplayMessageRouter" /E /I /Y
+xcopy "$lyra\Plugins\ModularGameplayActors" "$repo\Plugins\ModularGameplayActors" /E /I /Y
 ```
 
-`Game/Content/`, `Game/Plugins/CommonGame/`, and `Game/Plugins/GameplayMessageRouter/` are all gitignored — they stay local only.
+`Game/Content/` and the four plugin folders are all gitignored — they stay local only.
 
 ### 7. Open the UE project
 
