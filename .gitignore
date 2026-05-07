@@ -17,10 +17,14 @@ FileOpenOrder/
 *.xcworkspace/
 *.xcodeproj/
 
-# Lyra content — managed via Epic Games Launcher, NOT committed to Git.
-# To set up locally: copy your Lyra project's Content/ into Game/Content/
-# Add git-lfs for .uasset/.umap only when the team is ready (see docs/technical-architecture.md)
+# Lyra content & plugins — Epic Games EULA prohibits redistribution.
+# To set up locally: copy from your Lyra Starter Game install (via Epic Games Launcher)
+#   xcopy "<LyraPath>\Content" "Game\Content" /E /I /Y
+#   xcopy "<LyraPath>\Plugins\CommonGame" "Game\Plugins\CommonGame" /E /I /Y
+#   xcopy "<LyraPath>\Plugins\GameplayMessageRouter" "Game\Plugins\GameplayMessageRouter" /E /I /Y
 Game/Content/
+Game/Plugins/CommonGame/
+Game/Plugins/GameplayMessageRouter/
 Game/Plugins/UnrealMCP/MCPGameProject/Content/
 
 # UE generated headers
